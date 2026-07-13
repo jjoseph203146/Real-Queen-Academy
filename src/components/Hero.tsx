@@ -12,8 +12,8 @@ export default function Hero() {
       <div className="max-w-[760px] mx-auto flex flex-col items-center gap-7">
         <img
           src={logo}
-          alt="The Reel Queen Academy"
-          className="w-[220px] h-[220px] sm:w-[340px] sm:h-[340px] lg:w-[520px] lg:h-[520px] object-contain"
+          alt="The Reel Queen Academy — Visibility, Credibility, Opportunity"
+          className="w-[280px] sm:w-[420px] lg:w-[600px] h-auto object-contain"
         />
 
         <div className="flex flex-col gap-[18px]">
@@ -28,14 +28,6 @@ export default function Hero() {
             women elevate their online presence, strengthen their personal
             brand, and confidently show up online.
           </p>
-        </div>
-
-        <div className="flex items-center gap-[10px] mt-1">
-          <span className="h-px w-12 bg-plum-400" />
-          <span className="text-[13px] tracking-[2.5px] text-gold-500 uppercase whitespace-nowrap">
-            Visibility &nbsp;&bull;&nbsp; Credibility &nbsp;&bull;&nbsp; Opportunity
-          </span>
-          <span className="h-px w-12 bg-plum-400" />
         </div>
 
         <a

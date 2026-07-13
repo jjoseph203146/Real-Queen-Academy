@@ -1,4 +1,4 @@
-import ImagePlaceholder from "./ImagePlaceholder";
+import coachHeadshot from "../assets/coach-headshot.jpg";
 
 export default function MeetCoach() {
   return (
@@ -18,13 +18,17 @@ export default function MeetCoach() {
             className="relative w-full aspect-[4/5] rounded-md overflow-hidden"
             style={{ boxShadow: "0 24px 48px -12px rgba(42,15,53,0.35)" }}
           >
-            <ImagePlaceholder label="Drop coach headshot" />
+            <img
+              src={coachHeadshot}
+              alt="Coach headshot"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex flex-col gap-[22px]">
             <div>
               <h3 className="m-0 mb-[6px] font-display font-bold text-[26px] sm:text-[30px] text-plum-900">
-                Coach Name
+                Alicia Fitts
               </h3>
               <p className="m-0 text-sm tracking-[1.5px] uppercase text-gold-500 font-semibold">
                 Founder &amp; Lead Brand Coach, The Reel Queen Academy
