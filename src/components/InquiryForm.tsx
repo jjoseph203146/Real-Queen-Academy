@@ -6,6 +6,8 @@ const ENROLLMENT_OPTIONS = [
   "Not sure yet",
 ];
 
+const YES_NO_OPTIONS = ["No", "Yes"];
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // Early bird pricing runs through end-of-day July 17; standard pricing applies after.
@@ -31,6 +33,7 @@ export default function InquiryForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [enrollment, setEnrollment] = useState(ENROLLMENT_OPTIONS[0]);
+  const [hasQuestions, setHasQuestions] = useState(YES_NO_OPTIONS[0]);
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -178,6 +181,28 @@ export default function InquiryForm() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-xs tracking-[1.5px] uppercase text-[#8A7590]">
+                Do you have additional questions?
+              </label>
+              <select
+                value={hasQuestions}
+                onChange={(e) => setHasQuestions(e.target.value)}
+                className="px-3.5 py-[13px] border border-[#DCCFCF] rounded-[3px] font-sans text-[15px] text-plum-900 bg-cream-50"
+              >
+                {YES_NO_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {hasQuestions === "Yes" && (
+                <p className="m-0 text-xs text-[#8A7590]">
+                  Alicia will reach out to you personally.
+                </p>
+              )}
             </div>
 
             <div className="flex flex-col gap-2">
