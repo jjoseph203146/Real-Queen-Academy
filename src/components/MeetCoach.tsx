@@ -55,9 +55,12 @@ export default function MeetCoach() {
                 Experience &amp; Credentials
               </p>
               <p className="m-0 text-[15px] leading-[1.75] text-[#3F2C46]">
-                List years of experience, notable brand or client wins,
-                certifications, media features, or other credentials that
-                build trust here.
+                Through years of serving and empowering women entrepreneurs,
+                Alicia has helped women recognize the value of their gifts,
+                clarify their message, and confidently share their work with
+                the world. The Reel Queen Academy was created from a passion
+                to help women walk boldly in their purpose and allow their
+                light to shine.
               </p>
             </div>
 
