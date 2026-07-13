@@ -28,7 +28,7 @@ export default function MeetCoach() {
           <div className="flex flex-col gap-[22px]">
             <div>
               <h3 className="m-0 mb-[6px] font-display font-bold text-[26px] sm:text-[30px] text-plum-900">
-                Alicia Fitts
+                Alicia Fitts, CCUFC, CUDE
               </h3>
               <p className="m-0 text-sm tracking-[1.5px] uppercase text-gold-500 font-semibold">
                 Founder &amp; Lead Brand Coach, The Reel Queen Academy
@@ -36,10 +36,18 @@ export default function MeetCoach() {
             </div>
 
             <p className="m-0 text-base leading-[1.8] text-[#3F2C46]">
-              Add a warm, personal introduction here — who she is, the women
-              she serves, and the heart behind the Academy. This is the place
-              to speak directly to the purpose-driven woman she's building
-              this for.
+              Alicia Fitts is a Wealth &amp; Branding Strategist, passionate
+              Christian Business Coach, and the founder of Reel Queen
+              Academy. With over 15 years of marketing experience and 8
+              years in corporate business development, she helps
+              entrepreneurs build profitable brands, increase their
+              visibility, and create compelling content that attracts
+              opportunities. She is also a Certified Credit Union
+              Developmental Educator (CUDE). Alicia is passionate about
+              empowering faith-driven women to grow their businesses with
+              confidence, leverage their expertise, and create lasting
+              wealth and impact through strategic branding, marketing, and
+              authentic storytelling.
             </p>
 
             <div className="flex flex-col gap-[10px] px-6 py-[22px] bg-white border border-[#EADFCF] border-l-[3px] border-l-gold-500 rounded">

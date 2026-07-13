@@ -10,6 +10,8 @@ const YES_NO_OPTIONS = ["No", "Yes"];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqerknnk";
+
 // Early bird pricing runs through end-of-day July 17; standard pricing applies after.
 const EARLY_BIRD_DEADLINE = new Date("2026-07-17T23:59:59");
 const EARLY_BIRD_PAYMENT_URL = "https://buy.stripe.com/28E28sb6eg6L37o0vE9bO0d";
@@ -37,9 +39,11 @@ export default function InquiryForm() {
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const paymentDetails = getPaymentDetails();
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const nextErrors: Errors = {};
@@ -63,8 +67,29 @@ export default function InquiryForm() {
 
     setErrors(nextErrors);
 
-    if (Object.keys(nextErrors).length === 0) {
-      setSubmitted(true);
+    if (Object.keys(nextErrors).length > 0) {
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError(false);
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(e.currentTarget),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -118,6 +143,7 @@ export default function InquiryForm() {
                 </label>
                 <input
                   type="text"
+                  name="fullName"
                   placeholder="Jane Doe"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
@@ -135,6 +161,7 @@ export default function InquiryForm() {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="jane@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -154,6 +181,7 @@ export default function InquiryForm() {
               </label>
               <input
                 type="tel"
+                name="phone"
                 placeholder="(555) 123-4567"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -171,6 +199,7 @@ export default function InquiryForm() {
                 Which enrollment are you interested in?
               </label>
               <select
+                name="enrollment"
                 value={enrollment}
                 onChange={(e) => setEnrollment(e.target.value)}
                 className="px-3.5 py-[13px] border border-[#DCCFCF] rounded-[3px] font-sans text-[15px] text-plum-900 bg-cream-50"
@@ -188,6 +217,7 @@ export default function InquiryForm() {
                 Do you have additional questions?
               </label>
               <select
+                name="hasQuestions"
                 value={hasQuestions}
                 onChange={(e) => setHasQuestions(e.target.value)}
                 className="px-3.5 py-[13px] border border-[#DCCFCF] rounded-[3px] font-sans text-[15px] text-plum-900 bg-cream-50"
@@ -211,6 +241,7 @@ export default function InquiryForm() {
               </label>
               <textarea
                 rows={4}
+                name="message"
                 placeholder="Share a bit about your brand and your goals..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -218,11 +249,18 @@ export default function InquiryForm() {
               />
             </div>
 
+            {submitError && (
+              <p className="m-0 text-center text-xs text-red-600">
+                Something went wrong sending your inquiry. Please try again.
+              </p>
+            )}
+
             <button
               type="submit"
-              className="mt-2 p-4 bg-plum-900 hover:bg-plum-700 transition-colors text-cream-50 text-[15px] tracking-[1.5px] uppercase font-semibold border-none rounded-[3px] cursor-pointer"
+              disabled={submitting}
+              className="mt-2 p-4 bg-plum-900 hover:bg-plum-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors text-cream-50 text-[15px] tracking-[1.5px] uppercase font-semibold border-none rounded-[3px] cursor-pointer"
             >
-              Submit Inquiry
+              {submitting ? "Submitting…" : "Submit Inquiry"}
             </button>
 
             <p className="m-0 text-center text-[13px] text-[#8A7590]">
